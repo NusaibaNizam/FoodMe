@@ -1,26 +1,52 @@
-import React from "react";
-import { Text, View, Button } from "react-native";
+import React, {useEffect} from "react";
+import { Text, View, Button, FlatList, StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import { connect } from "react-redux";
+import { getDishes } from "../Redux/actionCreaters";
+import MenuItem from "../Components/MenuItem";
+
+const mapStateToProps=(state)=>{
+    return{
+        dishes: state.dishes,
+    };
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        getDishes:()=>dispatch(getDishes()),
+    }
+}
 
 
 const Menu=(props)=>{
+    useEffect(()=>{
+        props.getDishes();
+    },[])
+
     console.log(props)
     return(
     <SafeAreaProvider>
         <SafeAreaView>
-            <View>
-                <Text>
-                    Menu Screen
-                </Text>
-                <Button
-                    title="Dish Detail"
-                    onPress={()=>{
-                        props.navigation.navigate("Dish Detail")
-                    }}
+            <View style={styles.MainContainer}>
+                <FlatList
+                    data={props.dishes}
+                    renderItem={({item})=>(
+                        <MenuItem item={item}/>
+                    )}
+                    keyExtractor={item=>item.id.toString()}
                 />
             </View>
         </SafeAreaView>
     </SafeAreaProvider>
     );
 }
-export default Menu;
+const styles=StyleSheet.create({
+    MainContainer :{
+     
+        justifyContent: 'center',
+        margin: 5,
+        marginTop: (Platform.OS === 'ios') ? 20 : 0,
+     
+    },     
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Menu);
