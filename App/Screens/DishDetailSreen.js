@@ -1,9 +1,37 @@
 import React from "react";
 import { Text, View, Image, StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import Icon from '../Components/Icon'
+import { connect } from "react-redux";
+import { addAsFav } from "../Redux/actionCreaters";
+
+
+const mapStateToProps=(state)=>{
+    return{
+        favs:state.favs
+    }
+}
+
+const mapDispatchToProps=(dispatch)=>{
+    return{
+        addAsFav:(dishId)=>dispatch(addAsFav(dishId))
+    }
+}
 
 const DishDetail=(props)=>{
     const dish=props.route.params.dish;
+    const isFav=props.favs.some(id=> id==dish.id)
+
+
+    const markFav=(id)=>{
+        if(isFav){
+            alert("Already added to Favorites");
+        }else{
+            props.addAsFav(id)
+        }
+    }
+    let iconName="ios-heart-outline"
+    if(isFav) iconName="ios-heart-sharp"
     return(
 
             <SafeAreaProvider>
@@ -16,10 +44,22 @@ const DishDetail=(props)=>{
                             <Text style={{fontWeight: 'bold',fontSize:30}}>
                                 {dish.name}
                             </Text>
-                            <Text style={{marginTop:15,marginRight:20,color: '#6e6969',}}>
-                                {dish.price} tk
-                            </Text>
+                            <Icon 
+                                action={()=>markFav(dish.id)}
+                                iconStyle={
+                                    {
+                                        marginRight:20,
+                                        marginTop:12,
+                                    }
+                                }
+                                name={iconName} 
+                                size={24} 
+                                color="#AB3822" 
+                            />
                         </View>
+                        <Text style={{ marginBottom:'3%',}}>
+                            {dish.price}tk
+                        </Text>
                         <Text style={styles.bottomRow}>
                             {dish.category} {dish.label}
                         </Text>
@@ -61,4 +101,4 @@ const styles = StyleSheet.create({
     },
   });
   
-export default DishDetail;
+export default connect(mapStateToProps,mapDispatchToProps) (DishDetail);

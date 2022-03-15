@@ -13,3 +13,10 @@ export const getDishes=()=>dispatch=>{
     .catch((e)=>console.log(e))
     .then((res)=>dispatch(loadDishes(res.data)))
 }
+
+export const addAsFav=(dishId)=>{
+    return{
+        type:actionTypes.ADD_AS_FAB,
+        payload:dishId
+    }
+}
