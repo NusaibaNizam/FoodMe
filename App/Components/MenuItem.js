@@ -3,15 +3,18 @@ import {View, StyleSheet, Image, TouchableHighlight, Text} from "react-native"
 
 const MenuItem=(props)=>{
     return(
-        <TouchableHighlight>
+        <TouchableHighlight
+            onPress={()=>props.selectDish()}
+        >
             <View  style={{flex:1, flexDirection: 'row', width:'100%'}}>
                     {props.item.image && <Image source={{uri:props.item.image }}  style={styles.imageView}/>}
                 <View style={{flex:1, flexDirection:'column', width: '65%'}}>
                     
-
-                    <Text style={styles.textView}>
-                        {props.item.name}
-                    </Text>
+                    <View style={{flex:1, flexDirection: 'row'}}>
+                        <Text style={{...styles.textViewDes, color:'#d2d8d9'}}>
+                            {props.item.name}
+                        </Text>
+                    </View>
                     <View style={{flex:1, flexDirection: 'row'}}>
 
                         <Text style={styles.textViewDes} numberOfLines={3} ellipsizeMode='tail'>
@@ -44,14 +47,6 @@ const styles = StyleSheet.create({
      
     },
      
-    textView: {
-    
-        width:'50%', 
-        textAlignVertical:'center',
-        padding:5,
-        color: '#000',
-     
-    },
      
     });
 export default MenuItem;

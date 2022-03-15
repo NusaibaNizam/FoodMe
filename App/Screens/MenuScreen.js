@@ -1,5 +1,5 @@
 import React, {useEffect} from "react";
-import { Text, View, Button, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet } from "react-native";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { connect } from "react-redux";
 import { getDishes } from "../Redux/actionCreaters";
@@ -31,7 +31,9 @@ const Menu=(props)=>{
                 <FlatList
                     data={props.dishes}
                     renderItem={({item})=>(
-                        <MenuItem item={item}/>
+                        <MenuItem item={item} selectDish={()=>{
+                            props.navigation.navigate("Dish Detail",{dish:item})
+                        }}/>
                     )}
                     keyExtractor={item=>item.id.toString()}
                 />

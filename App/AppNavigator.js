@@ -12,7 +12,7 @@ const Stack=createNativeStackNavigator()
 const MenuStack=()=>{
     return(
         <Stack.Navigator>
-            <Stack.Screen name="MenuStack" component={Menu}/>
+            <Stack.Screen name="Menu" component={Menu}/>
             <Stack.Screen name="Dish Detail" component={DishDetail}/>
         </Stack.Navigator>
     );
@@ -24,7 +24,7 @@ const AppNavigator=()=>{
             headerShown: false,
           }}>
             <Drawer.Screen name="Home" component={Home}/>
-            <Drawer.Screen name="Menu" component={MenuStack}/>
+            <Drawer.Screen name="MenuStack" component={MenuStack}/>
         </Drawer.Navigator>
     );
 }
