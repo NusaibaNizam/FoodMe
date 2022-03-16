@@ -1,2 +1,3 @@
 export const LOAD_DISHES="LOAD_DISHES"
 export const ADD_AS_FAB="ADD_AS_FAB"
+export const REMOVE_FROM_FAB="REMOVE_FROM_FAB"

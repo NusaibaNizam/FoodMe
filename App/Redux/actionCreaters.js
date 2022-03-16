@@ -14,9 +14,15 @@ export const getDishes=()=>dispatch=>{
     .then((res)=>dispatch(loadDishes(res.data)))
 }
 
-export const addAsFav=(dishId)=>{
+export const addAsFav=(dish)=>{
     return{
         type:actionTypes.ADD_AS_FAB,
-        payload:dishId
+        payload:dish
+    }
+}
+export const removeFromFav=(dish)=>{
+    return{
+        type:actionTypes.REMOVE_FROM_FAB,
+        payload:dish
     }
 }

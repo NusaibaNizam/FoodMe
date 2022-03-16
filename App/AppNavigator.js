@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./Screens/HomeScreen";
 import Menu from "./Screens/MenuScreen";
 import DishDetail from "./Screens/DishDetailSreen";
+import Favorites from "./Screens/FavoritesScreen";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Icon from "./Components/Icon";
@@ -47,6 +48,39 @@ const MenuStack=()=>{
     );
 }
 
+const FavStack=()=>{
+
+    const navigation=useNavigation();
+
+    return(
+        <Stack.Navigator
+            screenOptions={
+                {
+                    headerRight:()=>(
+                        <Icon
+                            action={()=>{navigation.toggleDrawer()}}
+                            name="md-menu-outline" 
+                            size={24} 
+                            color='#f0fff0'
+                            iconStyle={{paddingRight:15}}
+                        />
+                    ),
+                    headerStyle:{
+                        backgroundColor:'#AB3822'
+                    },
+                    headerTintColor:'#f0fff0',
+                    headerTitleStyle:{
+                        fontWeight:'bold',
+                        fontFamily: 'serif'
+                    }
+                }
+            }
+        >
+            <Stack.Screen name="My Favorites" component={Favorites}/>
+        </Stack.Navigator>
+    );
+}
+
 const AppNavigator=()=>{
     return(
         <Drawer.Navigator initialRouteName="Home" screenOptions={{
@@ -54,6 +88,7 @@ const AppNavigator=()=>{
           }}>
             <Drawer.Screen name="Home" component={Home}/>
             <Drawer.Screen name="Dishes" component={MenuStack}/>
+            <Drawer.Screen name="Favorites" component={FavStack}/>
         </Drawer.Navigator>
     );
 }

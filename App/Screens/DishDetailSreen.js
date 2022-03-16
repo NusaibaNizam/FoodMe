@@ -20,14 +20,14 @@ const mapDispatchToProps=(dispatch)=>{
 
 const DishDetail=(props)=>{
     const dish=props.route.params.dish;
-    const isFav=props.favs.some(id=> id==dish.id)
+    const isFav=props.favs.some(item=> item.id==dish.id)
 
 
-    const markFav=(id)=>{
+    const markFav=(dish)=>{
         if(isFav){
             alert("Already added to Favorites");
         }else{
-            props.addAsFav(id)
+            props.addAsFav(dish)
         }
     }
     let iconName="ios-heart-outline"
@@ -45,7 +45,7 @@ const DishDetail=(props)=>{
                                 {dish.name}
                             </Text>
                             <Icon 
-                                action={()=>markFav(dish.id)}
+                                action={()=>markFav(dish)}
                                 iconStyle={
                                     {
                                         marginRight:20,
