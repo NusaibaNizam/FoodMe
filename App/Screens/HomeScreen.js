@@ -1,20 +1,22 @@
 import React from "react";
-import { Text, View, StyleSheet, Platform } from "react-native";
+import { ImageBackground,Text, View, StyleSheet, Platform } from "react-native";
 import Constants from "expo-constants";
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import background from '../../assets/background.jpg';
 
 const Home=()=>{
     return(
-    <SafeAreaProvider>
-        <SafeAreaView>
-            <View style={styles.view}>
-                <Text>
-                    Home Screen
-                </Text>
-            </View>
+        <ImageBackground source={background} style={{flex:1}}>
+            <SafeAreaProvider>
+                <SafeAreaView>
 
-        </SafeAreaView>
-    </SafeAreaProvider>
+                    <View style={styles.view}>
+                
+                    </View>
+                </SafeAreaView>
+                </SafeAreaProvider>
+        </ImageBackground>
+
     );
 }
 
